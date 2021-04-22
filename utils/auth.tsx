@@ -1,15 +1,18 @@
-import React, {
+import {
   createContext,
   Dispatch,
-  ReactElement,
-  ReactNode,
-  SetStateAction,
+  // ReactElement,
+  // ReactNode,
+  // SetStateAction,
   useContext,
-  useReducer,
+  // useReducer,
 } from 'react'
 
-const loginURL = (process.env.LOGIN_URL as string) || '/go/login'
-const checkURL = (process.env.CHECK_URL as string) || '/go/check'
+import { getUser } from './storage'
+import { GetServerSidePropsContext } from 'next'
+
+const loginURL = (process.env.NEXT_PUBLIC_LOGIN_URL as string) || '/go/login'
+const checkURL = (process.env.NEXT_PUBLIC_CHECK_URL as string) || '/go/check'
 
 export type User = {
   role: number
@@ -118,23 +121,9 @@ export const AuthContext = createContext(initialAuthState)
 
 export const SetAuthContext = createContext(initialSetAuthState)
 
-interface AuthProviderProperties {
-  children: ReactNode
-}
-
-export const getStorage = (): User => {
-  const userStorage: string | null = localStorage.getItem('user')
-  const user: User = { role: 0, name: '', token: '' }
-  if (userStorage) {
-    const u: User | undefined = JSON.parse(userStorage)
-    if (u) {
-      user.name = u.name
-      user.role = u.role
-      user.token = u.token
-    }
-  }
-  return user
-}
+// interface AuthProviderProperties {
+//   children: ReactNode
+// }
 
 const setStorage = (user: User): void => {
   localStorage.setItem('user', JSON.stringify(user))
@@ -186,34 +175,34 @@ export const reducer = (authState: AuthState, action: ReducerActions): AuthState
   }
 }
 
-export const AuthProvider = (properties: AuthProviderProperties): ReactElement => {
-  const { children } = properties
+// export const AuthProvider = (properties: AuthProviderProperties): ReactElement => {
+//   const { children } = properties
 
-  const user = getStorage()
-  const initState: AuthState = {
-    user,
-    login: false,
-    check: false,
-  }
+//   const user = getStorage()
+//   const initState: AuthState = {
+//     user,
+//     login: false,
+//     check: false,
+//   }
 
-  const [state, dispatch] = useReducer(reducer, initState)
+//   const [state, dispatch] = useReducer(reducer, initState)
 
-  const setState: SetAuthState = { dispatch }
+//   const setState: SetAuthState = { dispatch }
 
-  // const contentValues = useMemo(
-  //   () => ({
-  //     state,
-  //     dispatch,
-  //   }),
-  //   [state, dispatch],
-  // );
+//   // const contentValues = useMemo(
+//   //   () => ({
+//   //     state,
+//   //     dispatch,
+//   //   }),
+//   //   [state, dispatch],
+//   // );
 
-  return (
-    <AuthContext.Provider value={state}>
-      <SetAuthContext.Provider value={setState}>{children}</SetAuthContext.Provider>
-    </AuthContext.Provider>
-  )
-}
+//   return (
+//     <AuthContext.Provider value={state}>
+//       <SetAuthContext.Provider value={setState}>{children}</SetAuthContext.Provider>
+//     </AuthContext.Provider>
+//   )
+// }
 
 interface AuthContextProperties {
   auth: AuthState
@@ -226,13 +215,9 @@ export const useAuthState = (): AuthContextProperties => {
   return { auth, setAuth: setter.dispatch }
 }
 
-export const checkStorage = (
-  setChecker: Dispatch<SetStateAction<boolean>>,
-  setLogin: Dispatch<SetStateAction<boolean>>
-): void => {
-  const user = getStorage()
-
-  fetch(checkURL, {
+export const userIsChecked = async (ctx: GetServerSidePropsContext): Promise<boolean> => {
+  const user = getUser(ctx)
+  const res = await fetch(checkURL, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -240,15 +225,6 @@ export const checkStorage = (
     },
     body: `{ "t": "${user.token}", "r": ${user.role} }`,
   })
-    .then((response) => response.json())
-    .then((response) => response as CJson)
-    .then((jsonData) => {
-      if (jsonData.r) {
-        setLogin(true)
-        setChecker(true)
-      } else {
-        setLogin(false)
-        setChecker(true)
-      }
-    })
+  const cj: CJson = await res.json()
+  return cj.r
 }
