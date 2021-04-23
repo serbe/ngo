@@ -9,7 +9,6 @@ import {
 } from 'react'
 
 import { getUser } from './storage'
-import { GetServerSidePropsContext } from 'next'
 
 const loginURL = (process.env.NEXT_PUBLIC_LOGIN_URL as string) || '/go/login'
 const checkURL = (process.env.NEXT_PUBLIC_CHECK_URL as string) || '/go/check'
@@ -215,8 +214,8 @@ export const useAuthState = (): AuthContextProperties => {
   return { auth, setAuth: setter.dispatch }
 }
 
-export const userIsChecked = async (ctx: GetServerSidePropsContext): Promise<boolean> => {
-  const user = getUser(ctx)
+export const userIsChecked = async (cookies: { [key: string]: string }): Promise<boolean> => {
+  const user = getUser(cookies)
   const res = await fetch(checkURL, {
     method: 'POST',
     mode: 'cors',
@@ -228,3 +227,20 @@ export const userIsChecked = async (ctx: GetServerSidePropsContext): Promise<boo
   const cj: CJson = await res.json()
   return cj.r
 }
+
+// fetch = async () => {
+//   this.isFetching = true
+
+//   try {
+//     const response = await getApiData()
+//     this.items = response.items
+//     this.totalCount = response.totalCount
+//   } catch (e) {
+//     this.items = []
+//     this.totalCount = 0
+//     this.error = e.message
+//   } finally {
+//     this.isFetching = false
+//     this.error = null
+//   }
+// }

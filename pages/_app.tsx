@@ -1,20 +1,35 @@
 import '../styles/globals.css'
-import { AppProps } from 'next/app'
-import { GetServerSideProps, GetServerSidePropsContext, GetStaticProps } from 'next'
+import { AppProps, AppContext } from 'next/app'
 import { useRouter } from 'next/router'
+import React, { useEffect } from 'react'
+import nookies from 'nookies'
+// import { Provider } from 'mobx-react'
+
 import { userIsChecked } from '../utils/auth'
-import { useEffect } from 'react'
+// import { fetchInitialStoreState, DataStore } from '../utils/state'
 
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   const router = useRouter()
-  console.log('checked', pageProps.checked)
+  console.log('pageProps.checked', pageProps.checked)
   useEffect(() => {
-    if (pageProps.checked && pageProps.checked === false) {
+    console.log('useEffect, pageProps.checked', pageProps.checked)
+    if (pageProps.checked !== undefined && pageProps.checked === false) {
       console.log('redirect to login')
       router.push('/login')
     }
   }, [pageProps.checked])
   return <Component {...pageProps} />
+}
+
+MyApp.getInitialProps = async (appContext: AppContext) => {
+  const cookies = nookies.get(appContext.ctx)
+  const checked = await userIsChecked(cookies)
+  console.log('userIsChecked', checked)
+  return {
+    pageProps: {
+      checked: checked,
+    }, // will be passed to the page component as props
+  }
 }
 
 // export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -43,3 +58,41 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
 // }
 
 export default MyApp
+
+// import App from 'next/app'
+// import React from 'react'
+// import { Provider } from 'mobx-react'
+// import { fetchInitialStoreState, DataStore } from '../stores/DataStore'
+
+// class MyApp extends App {
+//   state = {
+//     dataStore: new DataStore(),
+//   }
+
+//   // Fetching serialized(JSON) store state
+//   static async getInitialProps(appContext) {
+//     const appProps = await App.getInitialProps(appContext)
+//     const initialStoreState = await fetchInitialStoreState()
+
+//     return {
+//       ...appProps,
+//       initialStoreState,
+//     }
+//   }
+
+//   // Hydrate serialized state to store
+//   static getDerivedStateFromProps(props, state) {
+//     state.dataStore.hydrate(props.initialStoreState)
+//     return state
+//   }
+
+//   render() {
+//     const { Component, pageProps } = this.props
+//     return (
+//       <Provider dataStore={this.state.dataStore}>
+//         <Component {...pageProps} />
+//       </Provider>
+//     )
+//   }
+// }
+// export default MyApp

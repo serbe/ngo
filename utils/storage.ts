@@ -1,10 +1,6 @@
-import { GetServerSidePropsContext } from 'next'
-import nookies from 'nookies'
-
 import { User } from './auth'
 
-export const getUser = (ctx: GetServerSidePropsContext): User => {
-  const cookies = nookies.get(ctx)
+export const getUser = (cookies: { [key: string]: string }): User => {
   const userStorage: string | null = cookies.user
   const user: User = { role: 0, name: '', token: '' }
   if (userStorage) {
