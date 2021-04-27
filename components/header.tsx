@@ -85,7 +85,7 @@ export const Header = (): JSX.Element => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const profileRef = useRef(null)
   const directoryRef = useRef(null)
-  const router = useRouter()
+  const { asPath } = useRouter()
 
   const handleClickOutsideProfile = (): void => {
     setProfileOpen(false)
@@ -161,7 +161,7 @@ export const Header = (): JSX.Element => {
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <div
                 className={`${
-                  router.pathname === '/' ? 'border-b-2 border-blue-500' : ''
+                  asPath === '/' ? 'border-b-2 border-blue-500' : ''
                 } flex-shrink-0 flex items-center`}
               >
                 <a href="/" className="block h-8 w-auto">
@@ -188,7 +188,7 @@ export const Header = (): JSX.Element => {
               </div>
               <div className="hidden sm:block sm:ml-6">
                 <div className="flex space-x-4">
-                  <MainItems path={router.pathname} />
+                  <MainItems path={asPath} />
                 </div>
               </div>
 
@@ -304,7 +304,7 @@ export const Header = (): JSX.Element => {
 
         <div className={`${mobileMenuOpen ? '' : 'hidden'} sm:hidden`} id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <MobileItems path={router.pathname} isMobile />
+            <MobileItems path={asPath} isMobile />
           </div>
         </div>
       </nav>
