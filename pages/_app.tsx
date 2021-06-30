@@ -1,11 +1,14 @@
-import '../styles/globals.css'
-import { AppProps, AppContext } from 'next/app'
-import { useRouter } from 'next/router'
-import React, { useEffect } from 'react'
-import nookies from 'nookies'
+import '../styles/globals.css';
+
+import { AppContext, AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import nookies from 'nookies';
+import React, { useEffect } from 'react';
+
+import { userIsChecked } from '../utils/auth';
+
 // import { Provider } from 'mobx-react'
 
-import { userIsChecked } from '../utils/auth'
 // import { fetchInitialStoreState, DataStore } from '../utils/state'
 
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
@@ -17,7 +20,7 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
       console.log('redirect to login')
       router.push('/login')
     }
-  }, [pageProps.checked])
+  }, [pageProps.checked, router])
   return <Component {...pageProps} />
 }
 

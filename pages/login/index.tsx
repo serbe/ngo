@@ -1,21 +1,17 @@
-import React, { FormEvent, KeyboardEvent, useRef } from 'react'
+import React, { FormEvent, KeyboardEvent, useRef } from 'react';
+
+import { login, useAuthState } from '../../utils/auth';
 
 // import { FormField } from '../../components/formfield'
-import { login } from '../../utils/auth'
-
 const Login = (): JSX.Element => {
-  // const { setAuth } = useAuthState()
+  const { setAuth } = useAuthState()
 
   const nameRef = useRef<HTMLInputElement | null>(null)
   const passRef = useRef<HTMLInputElement | null>(null)
 
-  // const submit = (): void => {
-  //   login(nameRef.current?.value || '', passRef.current?.value || '')
-  //     .then((res) => {
-  //       console.log(res)
-  //     })
-  //     .catch((err) => console.log(err))
-  // }
+  const submit = (): void => {
+    login(nameRef.current?.value || '', passRef.current?.value || '', setAuth)
+  }
 
   const submitHandler = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
@@ -38,7 +34,7 @@ const Login = (): JSX.Element => {
               ref={passRef}
               onKeyPress={(event: KeyboardEvent<HTMLInputElement>): void => {
                 if (event.key === 'Enter') {
-                  // submit()
+                  submit()
                 }
               }}
             />
