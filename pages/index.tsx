@@ -1,10 +1,10 @@
-import React from 'react'
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/client';
+import { parseCookies } from 'nookies';
+import React from 'react';
 
-import { GetServerSideProps } from 'next'
-import { parseCookies } from 'nookies'
-
-import { Footer } from '../components/footer'
-import { Header } from '../components/header'
+import { Footer } from '../components/footer';
+import { Header } from '../components/header';
 
 // import { Nav } from '../components/nav'
 
@@ -24,8 +24,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   console.log('cookies', cookies)
   const { PGADMIN_LANGUAGE } = cookies
   console.log('PGADMIN_LANGUAGE', PGADMIN_LANGUAGE)
+  const session = await getSession(ctx)
+  console.log('session', session)
   return {
-    props: {}, // will be passed to the page component as props
+    props: {
+      session: session,
+    },
   }
 }
 

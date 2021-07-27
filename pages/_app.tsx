@@ -1,5 +1,6 @@
 import '../styles/globals.css';
 
+import { Provider } from 'next-auth/client';
 import { AppContext, AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
@@ -21,7 +22,11 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
       router.push('/login')
     }
   }, [pageProps.checked, router])
-  return <Component {...pageProps} />
+  return (
+    <Provider session={pageProps.session}>
+      <Component {...pageProps} />
+    </Provider>
+  )
 }
 
 MyApp.getInitialProps = async (appContext: AppContext) => {

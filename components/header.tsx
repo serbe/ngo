@@ -1,6 +1,8 @@
-import React, { useRef, useState } from 'react'
-import { useRouter } from 'next/router'
-import useOnClickOutside from '../utils/clickOutside'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useRef, useState } from 'react';
+
+import useOnClickOutside from '../utils/clickOutside';
 
 interface Page {
   path: string
@@ -164,7 +166,8 @@ export const Header = (): JSX.Element => {
                   asPath === '/' ? 'border-b-2 border-blue-500' : ''
                 } flex-shrink-0 flex items-center`}
               >
-                <a href="/" className="block h-8 w-auto">
+                <Link href="/">
+                  <a className="block h-8 w-auto">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-8 w-9 text-gray-300"
@@ -179,7 +182,8 @@ export const Header = (): JSX.Element => {
                       d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
                     />
                   </svg>
-                </a>
+                  </a>
+                </Link>
                 {/* <img
                   className="hidden lg:block h-8 w-auto"
                   src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
@@ -249,11 +253,11 @@ export const Header = (): JSX.Element => {
                     onClick={() => setProfileOpen(!profileOpen)}
                   >
                     <span className="sr-only">Open user menu</span>
-                    <img
+                    {/* <Image
                       className="h-8 w-8 rounded-full"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       alt=""
-                    />
+                    /> */}
                   </button>
                 </div>
 
