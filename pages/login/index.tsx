@@ -1,10 +1,11 @@
 import React, { FormEvent, KeyboardEvent, useRef } from 'react';
 
 import { login } from '../../utils/auth';
+import { useStore } from '../../utils/store';
 
 // import { FormField } from '../../components/formfield'
 const Login = (): JSX.Element => {
-  const { setAuth } = useAuthState()
+  const store = useStore()
 
   const nameRef = useRef<HTMLInputElement | null>(null)
   const passRef = useRef<HTMLInputElement | null>(null)

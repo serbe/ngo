@@ -15,7 +15,7 @@ interface TJson {
   r: number
 }
 
-export const login = (name: string, pass: string) => {
+export const Login = (name: string, pass: string) => {
   const store = useStore()
   fetch(loginURL, {
     method: 'POST',
@@ -36,7 +36,7 @@ export const login = (name: string, pass: string) => {
     })
 }
 
-export const check = (token: string, role: string): void => {
+export const Check = (token: string, role: string): void => {
   const store = useStore()
   fetch(checkURL, {
     method: 'POST',

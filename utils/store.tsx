@@ -25,6 +25,10 @@ class AuthStore {
     return this.check
   }
 
+  get getToken() {
+    return this.user.token
+  }
+
   setAuth(user: User, login: boolean) {
     setStorage(user)
     this.setUser(user)

@@ -12,6 +12,7 @@ import { Rank, RankEmpty, RankList } from '../models/rank';
 import { Scope, ScopeEmpty, ScopeList } from '../models/scope';
 import { Siren, SirenEmpty, SirenList } from '../models/siren';
 import { SirenType, SirenTypeEmpty, SirenTypeList } from '../models/sirentype';
+import { useStore } from './store';
 
 // import { useAuthState } from './auth'
 
@@ -274,7 +275,7 @@ type JsonGetItemScheme =
     }
 
 export const GetItem = (name: string, id: string): Item => {
-  const { auth } = useAuthState()
+  const store = useStore()
   const [data, setData] = useState<Item>()
 
   useEffect(() => {
@@ -286,7 +287,7 @@ export const GetItem = (name: string, id: string): Item => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: `{"command":{"Get":{"Item":{"name":"${name}","id":${NumberID}}}},"addon":"${auth.user.token}"}`,
+        body: `{"command":{"Get":{"Item":{"name":"${name}","id":${NumberID}}}},"addon":"${store.getToken}"}`,
       })
         .then((response) => response.json())
         .then((response) => response as JsonGetItemScheme)
@@ -377,12 +378,12 @@ export const GetItem = (name: string, id: string): Item => {
         //   throw new Error('unknown item');
       }
     }
-  }, [id, name, auth.user.token])
+  }, [id, name, store.getToken])
   return data
 }
 
 export const GetList = (name: string): List[] => {
-  const { auth } = useAuthState()
+  const store = useStore()
   const [list, setList] = useState<List[]>([])
 
   useEffect(() => {
@@ -392,7 +393,7 @@ export const GetList = (name: string): List[] => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: `{"command":{"Get":{"List":"${name}"}},"addon":"${auth.user.token}"}`,
+      body: `{"command":{"Get":{"List":"${name}"}},"addon":"${store.getToken}"}`,
     })
       .then((response) => response.json())
       .then((response) => response as JsonListScheme)
@@ -444,13 +445,13 @@ export const GetList = (name: string): List[] => {
           }
         }
       })
-  }, [name, auth.user.token])
+  }, [name, store.getToken])
 
   return list
 }
 
 export const GetSelect = (name: string): [SelectItem[], string] => {
-  const { auth } = useAuthState()
+  const store = useStore()
   const [list, setSelect] = useState<SelectItem[]>([{ id: 0, name: '' }])
   const [error, setError] = useState<string>('')
 
@@ -461,7 +462,7 @@ export const GetSelect = (name: string): [SelectItem[], string] => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: `{"command":{"Get":{"List":"${name}"}},"addon":"${auth.user.token}"}`,
+      body: `{"command":{"Get":{"List":"${name}"}},"addon":"${store.getToken}"}`,
     })
       .then((response) => response.json())
       .then((response) => response as JsonListScheme)
@@ -523,7 +524,7 @@ export const GetSelect = (name: string): [SelectItem[], string] => {
       .catch(() => {
         return setError('unknown select')
       })
-  }, [name, auth.user.token])
+  }, [name, store.getToken])
 
   return [list, error]
 }
