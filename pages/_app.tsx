@@ -1,44 +1,72 @@
 import '../styles/globals.css';
 
-import { Provider } from 'next-auth/client';
-import { AppContext, AppProps } from 'next/app';
+import { enableStaticRendering } from 'mobx-react-lite';
+import App, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import nookies from 'nookies';
 import React, { useEffect } from 'react';
 
-import { userIsChecked } from '../utils/auth';
+import { userIsLogged } from '../utils/auth';
+import { AuthStore, StoreProvider } from '../utils/store';
+
+// import { Provider } from 'next-auth/client';
+
+type Props = {
+  isLogged: boolean
+} & AppProps
+
+type Init = {
+  isLogged: boolean
+} & AppInitialProps
+
+const isServer = typeof window === 'undefined';
+// eslint-disable-next-line react-hooks/rules-of-hooks
+enableStaticRendering(isServer)
+
+const store = new AuthStore()
 
 // import { Provider } from 'mobx-react'
 
 // import { fetchInitialStoreState, DataStore } from '../utils/state'
 
-const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
+const MyApp = ({ Component, pageProps, isLogged }: Props): JSX.Element => {
   const router = useRouter()
-  console.log('pageProps.checked', pageProps.checked)
-  useEffect(() => {
-    console.log('useEffect, pageProps.checked', pageProps.checked)
-    if (pageProps.checked !== undefined && pageProps.checked === false) {
-      console.log('redirect to login')
-      router.push('/login')
-    }
-  }, [pageProps.checked, router])
+  // const { initialData } = pageProps
+  console.log('store', store)
+  console.log('MyApp isLogged', isLogged)
+  // useEffect(() => {
+  //   console.log('useEffect, store.check', store.check)
+  //   if (store.check !== undefined && store.check === false) {
+  //     console.log('redirect to login')
+  //     router.push('/login')
+  //   }
+  // }, [])
   return (
-    <Provider session={pageProps.session}>
+    <StoreProvider store={store}>
       <Component {...pageProps} />
-    </Provider>
+    </StoreProvider>
   )
 }
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const cookies = nookies.get(appContext.ctx)
-  const checked = await userIsChecked(cookies)
-  console.log('userIsChecked', checked)
-  return {
-    pageProps: {
-      checked: checked,
-    }, // will be passed to the page component as props
-  }
+  const logged = await userIsLogged(cookies)
+  const appProps = await App.getInitialProps(appContext)
+  const props: Init = { isLogged: logged, ...appProps }
+  console.log('getInitialProps isLogged', logged)
+  return { ...props }
 }
+
+// MyApp.getInitialProps = async (appContext: AppContext) => {
+//   const cookies = nookies.get(appContext.ctx)
+//   const checked = await userIsChecked(cookies)
+//   console.log('userIsChecked', checked)
+//   return {
+//     pageProps: {
+//       checked: checked,
+//     }, // will be passed to the page component as props
+//   }
+// }
 
 // export const getServerSideProps: GetServerSideProps = async (context) => {
 //   // ...

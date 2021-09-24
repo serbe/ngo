@@ -1,6 +1,6 @@
 import React, { FormEvent, KeyboardEvent, useRef } from 'react';
 
-import { login, useAuthState } from '../../utils/auth';
+import { login } from '../../utils/auth';
 
 // import { FormField } from '../../components/formfield'
 const Login = (): JSX.Element => {

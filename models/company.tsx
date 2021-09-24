@@ -1,14 +1,15 @@
 // import React, { ChangeEvent } from 'react'
+import { ContactShort } from './contact';
+import { PracticeList } from './practice';
+
 
 // import { FormField } from '../components/formfield'
 // import { StringInputProperties } from '../components/input'
 // import { Select, SelectValues } from '../components/select'
-import { ContactShort } from './contact'
-import { PracticeList } from './practice'
-
 export type Company = {
   id: number
   name?: string
+  fullname?: string
   address?: string
   scope_id?: number
   note?: string
@@ -26,6 +27,7 @@ export const CompanyEmpty: Company = {
 export type CompanyList = {
   id: number
   name?: string
+  fullname?: string
   address?: string
   scope_name?: string
   emails?: string[]

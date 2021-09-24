@@ -1,4 +1,12 @@
-import { User } from './auth'
+import { User } from '../models/user';
+
+export const setStorage = (user: User): void => {
+  localStorage.setItem('user', JSON.stringify(user))
+}
+
+export const clearStorage = (): void => {
+  localStorage.removeItem('user')
+}
 
 export const getUser = (cookies: { [key: string]: string }): User => {
   const userStorage: string | null = cookies.user

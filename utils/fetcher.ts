@@ -1,18 +1,19 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import { Certificate, CertificateEmpty, CertificateList } from '../models/certificate'
-import { Company, CompanyEmpty, CompanyList } from '../models/company'
-import { Contact, ContactEmpty, ContactList } from '../models/contact'
-import { Department, DepartmentEmpty, DepartmentList } from '../models/department'
-import { Education, EducationEmpty, EducationList, EducationShort } from '../models/education'
-import { Kind, KindEmpty, KindList } from '../models/kind'
-import { Post, PostEmpty, PostList } from '../models/post'
-import { Practice, PracticeEmpty, PracticeList, PracticeShort } from '../models/practice'
-import { Rank, RankEmpty, RankList } from '../models/rank'
-import { Scope, ScopeEmpty, ScopeList } from '../models/scope'
-import { Siren, SirenEmpty, SirenList } from '../models/siren'
-import { SirenType, SirenTypeEmpty, SirenTypeList } from '../models/sirentype'
-import { useAuthState } from './auth'
+import { Certificate, CertificateEmpty, CertificateList } from '../models/certificate';
+import { Company, CompanyEmpty, CompanyList } from '../models/company';
+import { Contact, ContactEmpty, ContactList } from '../models/contact';
+import { Department, DepartmentEmpty, DepartmentList } from '../models/department';
+import { Education, EducationEmpty, EducationList, EducationShort } from '../models/education';
+import { Kind, KindEmpty, KindList } from '../models/kind';
+import { Post, PostEmpty, PostList } from '../models/post';
+import { Practice, PracticeEmpty, PracticeList, PracticeShort } from '../models/practice';
+import { Rank, RankEmpty, RankList } from '../models/rank';
+import { Scope, ScopeEmpty, ScopeList } from '../models/scope';
+import { Siren, SirenEmpty, SirenList } from '../models/siren';
+import { SirenType, SirenTypeEmpty, SirenTypeList } from '../models/sirentype';
+
+// import { useAuthState } from './auth'
 
 const URL = (process.env.NEXT_PUBLIC_JSON_URL as string) || '/go/json'
 
