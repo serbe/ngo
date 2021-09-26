@@ -14,8 +14,8 @@ export const Home = (): JSX.Element => {
       <Header />
       <Footer />
     </div>
-  )
-}
+  );
+};
 
 // export const getServerSideProps: GetServerSideProps = async (ctx) => {
 //   const cookies = parseCookies(ctx)
@@ -31,7 +31,7 @@ export const Home = (): JSX.Element => {
 //   }
 // }
 
-export default Home
+export default Home;
 
 // import Layout from '../components/Layout'
 // import { inject } from 'mobx-react'
