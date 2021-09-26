@@ -12,50 +12,52 @@ import { AuthStore, StoreProvider } from '../utils/store';
 // import { Provider } from 'next-auth/client';
 
 type Props = {
-  isLogged: boolean
-} & AppProps
+  isLogged: boolean;
+} & AppProps;
 
 type Init = {
-  isLogged: boolean
-} & AppInitialProps
+  isLogged: boolean;
+} & AppInitialProps;
 
 const isServer = typeof window === 'undefined';
 // eslint-disable-next-line react-hooks/rules-of-hooks
-enableStaticRendering(isServer)
+enableStaticRendering(isServer);
 
-const store = new AuthStore()
+const store = new AuthStore();
 
 // import { Provider } from 'mobx-react'
 
 // import { fetchInitialStoreState, DataStore } from '../utils/state'
 
 const MyApp = ({ Component, pageProps, isLogged }: Props): JSX.Element => {
-  const router = useRouter()
+  const router = useRouter();
   // const { initialData } = pageProps
-  console.log('store', store)
-  console.log('MyApp isLogged', isLogged)
-  // useEffect(() => {
-  //   console.log('useEffect, store.check', store.check)
-  //   if (store.check !== undefined && store.check === false) {
-  //     console.log('redirect to login')
-  //     router.push('/login')
-  //   }
-  // }, [])
+  // console.log('store', store);
+  console.log('MyApp isLogged', isLogged);
+  useEffect(() => {
+    console.log('useEffect, isLogged', isLogged);
+    console.log('useEffect, router.asPath', router.asPath);
+    // if (store.check !== undefined && store.check === false) {
+    if (!isLogged && router.asPath !== '/login') {
+      console.log('redirect to login');
+      router.push('/login')
+    }
+  }, [isLogged, router]);
   return (
     <StoreProvider store={store}>
       <Component {...pageProps} />
     </StoreProvider>
-  )
-}
+  );
+};
 
 MyApp.getInitialProps = async (appContext: AppContext) => {
-  const cookies = nookies.get(appContext.ctx)
-  const logged = await userIsLogged(cookies)
-  const appProps = await App.getInitialProps(appContext)
-  const props: Init = { isLogged: logged, ...appProps }
-  console.log('getInitialProps isLogged', logged)
-  return { ...props }
-}
+  const cookies = nookies.get(appContext.ctx);
+  const logged = await userIsLogged(cookies);
+  const appProps = await App.getInitialProps(appContext);
+  const props: Init = { isLogged: logged, ...appProps };
+  console.log('getInitialProps isLogged', logged);
+  return { ...props };
+};
 
 // MyApp.getInitialProps = async (appContext: AppContext) => {
 //   const cookies = nookies.get(appContext.ctx)
@@ -93,7 +95,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 //   }
 // }
 
-export default MyApp
+export default MyApp;
 
 // import App from 'next/app'
 // import React from 'react'

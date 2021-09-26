@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react'
-import useOnClickOutside from '../utils/clickOutside'
+import React, { useState, useRef } from 'react';
+import useOnClickOutside from '../utils/clickOutside';
 // import styles from './nav.css'
 
 // interface Setter {
@@ -15,7 +15,7 @@ const mainItems = [
   { link: '/contacts', name: 'Контакты' },
   { link: '/companies', name: 'Организации' },
   { link: '/sirens', name: 'Сирены' },
-]
+];
 
 const dropdownItems = [
   { link: '/departments', name: 'Отделы' },
@@ -27,7 +27,7 @@ const dropdownItems = [
   { link: '/scopes', name: 'Сферы' },
   { link: '/certificates', name: 'Удостоверения' },
   { link: '/sirentypes', name: 'Типы сирен' },
-]
+];
 
 // const activeItem = "text-gray-900 bg-gray-200";
 // const passiveItem = "bg-transparent";
@@ -44,7 +44,7 @@ const MainItems = (): JSX.Element => (
       </a>
     ))}
   </>
-)
+);
 
 const DropdownItems = (): JSX.Element => (
   <div className="px-2 py-2 bg-white rounded-md shadow">
@@ -58,18 +58,18 @@ const DropdownItems = (): JSX.Element => (
       </a>
     ))}
   </div>
-)
+);
 
 export const Nav = (): JSX.Element => {
-  const [open, setOpen] = useState(false)
-  const [openMenu, setOpenMenu] = useState(false)
-  const ref = useRef(null)
+  const [open, setOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const ref = useRef(null);
 
   const handleClickOutside = (): void => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
-  useOnClickOutside(ref, handleClickOutside)
+  useOnClickOutside(ref, handleClickOutside);
 
   return (
     <div ref={ref} className="w-full text-gray-700 bg-white">
@@ -165,5 +165,5 @@ export const Nav = (): JSX.Element => {
         </nav>
       </div>
     </div>
-  )
-}
+  );
+};

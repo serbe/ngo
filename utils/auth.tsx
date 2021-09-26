@@ -1,22 +1,22 @@
-import { createContext, Dispatch, useContext } from 'react';
+// import { createContext, Dispatch, useContext } from 'react';
 
 import { clearStorage, getUser } from './storage';
 import { useStore } from './store';
 
-const loginURL = (process.env.NEXT_PUBLIC_LOGIN_URL as string) || '/go/login'
-const checkURL = (process.env.NEXT_PUBLIC_CHECK_URL as string) || '/go/check'
+const loginURL = (process.env.NEXT_PUBLIC_LOGIN_URL as string) || '/go/login';
+const checkURL = (process.env.NEXT_PUBLIC_CHECK_URL as string) || '/go/check';
 
 export interface CJson {
-  r: boolean
+  r: boolean;
 }
 
 interface TJson {
-  t: string
-  r: number
+  t: string;
+  r: number;
 }
 
-export const Login = (name: string, pass: string) => {
-  const store = useStore()
+export const PostLogin = (name: string, pass: string): void => {
+  const store = useStore();
   fetch(loginURL, {
     method: 'POST',
     mode: 'cors',
@@ -28,16 +28,19 @@ export const Login = (name: string, pass: string) => {
     .then((response) => response.json())
     .then((response) => response as TJson)
     .then((jsonData) => {
-      store.setAuth({
-        role: jsonData.r,
-        name,
-        token: jsonData.t,
-      }, true)
-    })
-}
+      store.setAuth(
+        {
+          role: jsonData.r,
+          name,
+          token: jsonData.t,
+        },
+        true
+      );
+    });
+};
 
-export const Check = (token: string, role: string): void => {
-  const store = useStore()
+export const PostCheck = (token: string, role: string): void => {
+  // const store = useStore()
   fetch(checkURL, {
     method: 'POST',
     mode: 'cors',
@@ -49,13 +52,13 @@ export const Check = (token: string, role: string): void => {
     .then((response) => response.json())
     .then((response) => response as CJson)
     .then((jsonData) => {
-      return jsonData.r
-    })
-}
+      return jsonData.r;
+    });
+};
 
 export const logout = (): void => {
-  clearStorage()
-}
+  clearStorage();
+};
 
 // interface AuthProviderProperties {
 //   children: ReactNode
@@ -91,7 +94,7 @@ export const logout = (): void => {
 // }
 
 export const userIsLogged = async (cookies: { [key: string]: string }): Promise<boolean> => {
-  const user = getUser(cookies)
+  const user = getUser(cookies);
   const res = await fetch(checkURL, {
     method: 'POST',
     mode: 'cors',
@@ -99,10 +102,10 @@ export const userIsLogged = async (cookies: { [key: string]: string }): Promise<
       'Content-Type': 'application/json',
     },
     body: `{ "t": "${user.token}", "r": ${user.role} }`,
-  })
-  const cj: CJson = await res.json()
-  return cj.r
-}
+  });
+  const cj: CJson = await res.json();
+  return cj.r;
+};
 
 // fetch = async () => {
 //   this.isFetching = true

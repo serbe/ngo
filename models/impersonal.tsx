@@ -8,7 +8,7 @@
 // import { addEmptyString } from '../services/utils'
 
 export interface ParameterTypes {
-  id: string
+  id: string;
 }
 
 // export type EmailValues = {

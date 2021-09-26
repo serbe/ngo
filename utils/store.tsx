@@ -1,68 +1,83 @@
 import { makeAutoObservable } from 'mobx';
-import { createContext, FC, ReactNode, useContext, useEffect } from 'react';
+import { createContext, ReactNode, useContext } from 'react';
 
 import { User } from '../models/user';
 import { clearStorage, setStorage } from './storage';
 
 class AuthStore {
-  user: User = { role: 0, name: '', token: '' }
-  login: boolean = false
-  check: boolean = false
+  user: User = { role: 0, name: '', token: '' };
+  login = false;
+  check = false;
+  count = 0;
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this);
   }
 
-  get getUser() {
-    return this.user
+  get getUser(): User {
+    this.increase();
+    return this.user;
   }
 
-  get getLogin() {
-    return this.login
+  get getLogin(): boolean {
+    this.increase();
+    return this.login;
   }
 
-  get getCheck() {
-    return this.check
+  get getCheck(): boolean {
+    this.increase();
+    return this.check;
   }
 
-  get getToken() {
-    return this.user.token
+  get getToken(): string {
+    this.increase();
+    return this.user.token;
   }
 
-  setAuth(user: User, login: boolean) {
-    setStorage(user)
-    this.setUser(user)
-    this.setLogin(login)
+  setAuth(user: User, login: boolean): void {
+    this.increase();
+    setStorage(user);
+    this.setUser(user);
+    this.setLogin(login);
   }
 
-  clearAuth() {
-    clearStorage()
-    this.setUser({ role: 0, name: '', token: '' })
-    this.setLogin(false)
+  clearAuth(): void {
+    this.increase();
+    clearStorage();
+    this.setUser({ role: 0, name: '', token: '' });
+    this.setLogin(false);
   }
 
-  setUser(user: User) {
-    this.user = user
+  setUser(user: User): void {
+    this.increase();
+    this.user = user;
   }
 
-  setLogin(login: boolean) {
-    this.login = login
-    this.setCheck(true)
+  setLogin(login: boolean): void {
+    this.increase();
+    this.login = login;
+    this.setCheck(true);
   }
 
-  setCheck(check: boolean) {
-    this.check = check
+  setCheck(check: boolean): void {
+    this.increase();
+    this.check = check;
+  }
+
+  increase(): void {
+    this.count += 1;
+    console.log(this.count);
   }
 }
 
 interface StoreProviderProperties {
-  store: AuthStore
-  children: ReactNode
+  store: AuthStore;
+  children: ReactNode;
 }
 
-const StoreContext = createContext<AuthStore>(new AuthStore())
+const StoreContext = createContext<AuthStore>(new AuthStore());
 
-const StoreProvider = ({ store, children }: StoreProviderProperties) => {
+const StoreProvider = ({ store, children }: StoreProviderProperties): JSX.Element => {
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     store.writeBlock()
@@ -71,11 +86,11 @@ const StoreProvider = ({ store, children }: StoreProviderProperties) => {
   //   return () => clearInterval(interval)
   // }, [store])
 
-  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
-}
+  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
+};
 
-const useStore = () => {
-  return useContext(StoreContext)
-}
+const useStore = (): AuthStore => {
+  return useContext(StoreContext);
+};
 
-export { AuthStore, StoreProvider, useStore }
+export { AuthStore, StoreProvider, useStore };

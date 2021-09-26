@@ -5,22 +5,22 @@
 // import { Select, SelectValues } from '../components/select'
 
 export type SirenType = {
-  id: number
-  name?: string
-  radius?: number
-  note?: string
-}
+  id: number;
+  name?: string;
+  radius?: number;
+  note?: string;
+};
 
 export const SirenTypeEmpty: SirenType = {
   id: 0,
-}
+};
 
 export type SirenTypeList = {
-  id: number
-  name?: string
-  radius?: number
-  note?: string
-}
+  id: number;
+  name?: string;
+  radius?: number;
+  note?: string;
+};
 
 // export const SirenTypeIDSelect = (properties: SelectValues): JSX.Element => (
 //   <Select

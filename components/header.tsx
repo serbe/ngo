@@ -5,15 +5,15 @@ import React, { useRef, useState } from 'react';
 import useOnClickOutside from '../utils/clickOutside';
 
 interface Page {
-  path: string
-  isMobile?: boolean
+  path: string;
+  isMobile?: boolean;
 }
 
 const mainItems = [
   { link: '/contacts', name: 'Контакты' },
   { link: '/companies', name: 'Организации' },
   { link: '/sirens', name: 'Сирены' },
-]
+];
 
 const dropdownItems = [
   { link: '/departments', name: 'Отделы' },
@@ -25,7 +25,7 @@ const dropdownItems = [
   { link: '/scopes', name: 'Сферы' },
   { link: '/certificates', name: 'Удостоверения' },
   { link: '/sirentypes', name: 'Типы сирен' },
-]
+];
 
 const navItem = (current: boolean, isMobile: boolean): string =>
   current
@@ -34,7 +34,7 @@ const navItem = (current: boolean, isMobile: boolean): string =>
       } px-3 py-2 text-sm font-medium`
     : `text-gray-300 hover:bg-gray-700 hover:text-white ${
         isMobile ? 'block' : ''
-      } px-3 py-2 text-sm font-medium`
+      } px-3 py-2 text-sm font-medium`;
 
 const MainItems = (page: Page): JSX.Element => (
   <>
@@ -49,7 +49,7 @@ const MainItems = (page: Page): JSX.Element => (
       </a>
     ))}
   </>
-)
+);
 
 const MobileItems = (page: Page): JSX.Element => (
   <>
@@ -64,7 +64,7 @@ const MobileItems = (page: Page): JSX.Element => (
       </a>
     ))}
   </>
-)
+);
 
 const DropdownItems = (): JSX.Element => (
   <>
@@ -79,25 +79,25 @@ const DropdownItems = (): JSX.Element => (
       </a>
     ))}
   </>
-)
+);
 
 export const Header = (): JSX.Element => {
-  const [profileOpen, setProfileOpen] = useState(false)
-  const [directoryOpen, setDirectoryOpen] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const profileRef = useRef(null)
-  const directoryRef = useRef(null)
-  const { asPath } = useRouter()
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [directoryOpen, setDirectoryOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const profileRef = useRef(null);
+  const directoryRef = useRef(null);
+  const { asPath } = useRouter();
 
   const handleClickOutsideProfile = (): void => {
-    setProfileOpen(false)
-  }
+    setProfileOpen(false);
+  };
   const handleClickOutsideDirectory = (): void => {
-    setDirectoryOpen(false)
-  }
+    setDirectoryOpen(false);
+  };
 
-  useOnClickOutside(profileRef, handleClickOutsideProfile)
-  useOnClickOutside(directoryRef, handleClickOutsideDirectory)
+  useOnClickOutside(profileRef, handleClickOutsideProfile);
+  useOnClickOutside(directoryRef, handleClickOutsideDirectory);
 
   return (
     <>
@@ -168,20 +168,20 @@ export const Header = (): JSX.Element => {
               >
                 <Link href="/">
                   <a className="block h-8 w-auto">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-9 text-gray-300"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                    />
-                  </svg>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-9 text-gray-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                      />
+                    </svg>
                   </a>
                 </Link>
                 {/* <img
@@ -313,5 +313,5 @@ export const Header = (): JSX.Element => {
         </div>
       </nav>
     </>
-  )
-}
+  );
+};

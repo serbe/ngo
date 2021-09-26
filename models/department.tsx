@@ -5,20 +5,20 @@
 // import { Select, SelectValues } from '../components/select'
 
 export type Department = {
-  id: number
-  name?: string
-  note?: string
-}
+  id: number;
+  name?: string;
+  note?: string;
+};
 
 export const DepartmentEmpty: Department = {
   id: 0,
-}
+};
 
 export type DepartmentList = {
-  id: number
-  name?: string
-  note?: string
-}
+  id: number;
+  name?: string;
+  note?: string;
+};
 
 // export const DepartmentIDSelect = (properties: SelectValues): JSX.Element => (
 //   <Select

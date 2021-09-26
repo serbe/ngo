@@ -7,50 +7,50 @@
 // import { Select, SelectValues } from '../components/select'
 
 export interface ContactShortValues {
-  contacts: ContactShort[]
+  contacts: ContactShort[];
 }
 
 export interface ContactEducationsValues {
-  educations: string[]
+  educations: string[];
 }
 
 export type Contact = {
-  id: number
-  name?: string
-  company_id?: number
-  department_id?: number
-  post_id?: number
-  post_go_id?: number
-  rank_id?: number
-  birthday?: string
-  note?: string
-  emails?: string[]
-  phones?: number[]
-  faxes?: number[]
-  educations?: string[]
-}
+  id: number;
+  name?: string;
+  company_id?: number;
+  department_id?: number;
+  post_id?: number;
+  post_go_id?: number;
+  rank_id?: number;
+  birthday?: string;
+  note?: string;
+  emails?: string[];
+  phones?: number[];
+  faxes?: number[];
+  educations?: string[];
+};
 
 export const ContactEmpty: Contact = {
   id: 0,
-}
+};
 
 export type ContactList = {
-  id: number
-  name?: string
-  company_id?: number
-  company_name?: string
-  post_name?: string
-  phones?: number[]
-  faxes?: number[]
-}
+  id: number;
+  name?: string;
+  company_id?: number;
+  company_name?: string;
+  post_name?: string;
+  phones?: number[];
+  faxes?: number[];
+};
 
 export type ContactShort = {
-  id: number
-  name?: string
-  department_name?: string
-  post_name?: string
-  post_go_name?: string
-}
+  id: number;
+  name?: string;
+  department_name?: string;
+  post_name?: string;
+  post_go_name?: string;
+};
 
 // export const ContactNameInput = (properties: StringInputProperties): JSX.Element => (
 //   <FormField

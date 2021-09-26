@@ -4,33 +4,33 @@
 // import { NumberInputProperties, StringInputProperties } from '../components/input'
 
 export type Siren = {
-  id: number
-  num_id?: number
-  num_pass?: string
-  siren_type_id?: number
-  address?: string
-  radio?: string
-  desk?: string
-  contact_id?: number
-  company_id?: number
-  latitude?: string
-  longitude?: string
-  stage?: number
-  own?: string
-  note?: string
-}
+  id: number;
+  num_id?: number;
+  num_pass?: string;
+  siren_type_id?: number;
+  address?: string;
+  radio?: string;
+  desk?: string;
+  contact_id?: number;
+  company_id?: number;
+  latitude?: string;
+  longitude?: string;
+  stage?: number;
+  own?: string;
+  note?: string;
+};
 
 export const SirenEmpty: Siren = {
   id: 0,
-}
+};
 
 export type SirenList = {
-  id: number
-  siren_type_name?: string
-  address?: string
-  contact_name?: string
-  phones?: number[]
-}
+  id: number;
+  siren_type_name?: string;
+  address?: string;
+  contact_name?: string;
+  phones?: number[];
+};
 
 // export const SirenNumberIDInput = (properties: NumberInputProperties): JSX.Element => (
 //   <FormField

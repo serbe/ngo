@@ -5,20 +5,20 @@
 // import { Select, SelectValues } from '../components/select'
 
 export type Rank = {
-  id: number
-  name?: string
-  note?: string
-}
+  id: number;
+  name?: string;
+  note?: string;
+};
 
 export const RankEmpty: Rank = {
   id: 0,
-}
+};
 
 export type RankList = {
-  id: number
-  name?: string
-  note?: string
-}
+  id: number;
+  name?: string;
+  note?: string;
+};
 
 // export const RankIDSelect = (properties: SelectValues): JSX.Element => (
 //   <Select

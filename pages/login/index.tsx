@@ -1,22 +1,19 @@
 import React, { FormEvent, KeyboardEvent, useRef } from 'react';
 
-import { login } from '../../utils/auth';
-import { useStore } from '../../utils/store';
+import { PostLogin } from '../../utils/auth';
 
 // import { FormField } from '../../components/formfield'
 const Login = (): JSX.Element => {
-  const store = useStore()
-
-  const nameRef = useRef<HTMLInputElement | null>(null)
-  const passRef = useRef<HTMLInputElement | null>(null)
+  const nameRef = useRef<HTMLInputElement | null>(null);
+  const passRef = useRef<HTMLInputElement | null>(null);
 
   const submit = (): void => {
-    login(nameRef.current?.value || '', passRef.current?.value || '', setAuth)
-  }
+    PostLogin(nameRef.current?.value || '', passRef.current?.value || '');
+  };
 
   const submitHandler = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault()
-  }
+    event.preventDefault();
+  };
 
   return (
     <div className="container w300">
@@ -35,7 +32,7 @@ const Login = (): JSX.Element => {
               ref={passRef}
               onKeyPress={(event: KeyboardEvent<HTMLInputElement>): void => {
                 if (event.key === 'Enter') {
-                  submit()
+                  submit();
                 }
               }}
             />
@@ -55,7 +52,7 @@ const Login = (): JSX.Element => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

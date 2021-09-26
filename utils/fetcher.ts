@@ -16,12 +16,12 @@ import { useStore } from './store';
 
 // import { useAuthState } from './auth'
 
-const URL = (process.env.NEXT_PUBLIC_JSON_URL as string) || '/go/json'
+const URL = (process.env.NEXT_PUBLIC_JSON_URL as string) || '/go/json';
 
 export type SelectItem = {
-  id: number
-  name: string
-}
+  id: number;
+  name: string;
+};
 
 export type Item =
   | undefined
@@ -36,7 +36,7 @@ export type Item =
   | Rank
   | Scope
   | Siren
-  | SirenType
+  | SirenType;
 
 export type List =
   | CertificateList
@@ -52,166 +52,166 @@ export type List =
   | RankList
   | ScopeList
   | SirenList
-  | SirenTypeList
+  | SirenTypeList;
 
 type JsonListScheme =
   | undefined
   | {
-      command: 'Get'
-      name: 'CertificateList'
-      object: { CertificateList: CertificateList[] }
-      error: string
+      command: 'Get';
+      name: 'CertificateList';
+      object: { CertificateList: CertificateList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'CompanyList'
-      object: { CompanyList: CompanyList[] }
-      error: string
+      command: 'Get';
+      name: 'CompanyList';
+      object: { CompanyList: CompanyList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'CompanySelect'
-      object: { SelectItem: SelectItem[] }
-      error: string
+      command: 'Get';
+      name: 'CompanySelect';
+      object: { SelectItem: SelectItem[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'ContactList'
-      object: { ContactList: ContactList[] }
-      error: string
+      command: 'Get';
+      name: 'ContactList';
+      object: { ContactList: ContactList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'ContactSelect'
-      object: { SelectItem: SelectItem[] }
-      error: string
+      command: 'Get';
+      name: 'ContactSelect';
+      object: { SelectItem: SelectItem[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'DepartmentList'
-      object: { DepartmentList: DepartmentList[] }
-      error: string
+      command: 'Get';
+      name: 'DepartmentList';
+      object: { DepartmentList: DepartmentList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'DepartmentSelect'
-      object: { SelectItem: SelectItem[] }
-      error: string
+      command: 'Get';
+      name: 'DepartmentSelect';
+      object: { SelectItem: SelectItem[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'EducationList'
-      object: { EducationList: EducationList[] }
-      error: string
+      command: 'Get';
+      name: 'EducationList';
+      object: { EducationList: EducationList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'EducationNear'
-      object: { EducationShort: EducationShort[] }
-      error: string
+      command: 'Get';
+      name: 'EducationNear';
+      object: { EducationShort: EducationShort[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'KindList'
-      object: { KindList: KindList[] }
-      error: string
+      command: 'Get';
+      name: 'KindList';
+      object: { KindList: KindList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'KindSelect'
-      object: { SelectItem: SelectItem[] }
-      error: string
+      command: 'Get';
+      name: 'KindSelect';
+      object: { SelectItem: SelectItem[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'PostGoSelect'
-      object: { SelectItem: SelectItem[] }
-      error: string
+      command: 'Get';
+      name: 'PostGoSelect';
+      object: { SelectItem: SelectItem[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'PostList'
-      object: { PostList: PostList[] }
-      error: string
+      command: 'Get';
+      name: 'PostList';
+      object: { PostList: PostList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'PostSelect'
-      object: { SelectItem: SelectItem[] }
-      error: string
+      command: 'Get';
+      name: 'PostSelect';
+      object: { SelectItem: SelectItem[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'PracticeList'
-      object: { PracticeList: PracticeList[] }
-      error: string
+      command: 'Get';
+      name: 'PracticeList';
+      object: { PracticeList: PracticeList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'PracticeNear'
-      object: { PracticeShort: PracticeShort[] }
-      error: string
+      command: 'Get';
+      name: 'PracticeNear';
+      object: { PracticeShort: PracticeShort[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'RankList'
-      object: { RankList: RankList[] }
-      error: string
+      command: 'Get';
+      name: 'RankList';
+      object: { RankList: RankList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'RankSelect'
-      object: { SelectItem: SelectItem[] }
-      error: string
+      command: 'Get';
+      name: 'RankSelect';
+      object: { SelectItem: SelectItem[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'ScopeList'
-      object: { ScopeList: ScopeList[] }
-      error: string
+      command: 'Get';
+      name: 'ScopeList';
+      object: { ScopeList: ScopeList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'ScopeSelect'
-      object: { SelectItem: SelectItem[] }
-      error: string
+      command: 'Get';
+      name: 'ScopeSelect';
+      object: { SelectItem: SelectItem[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'SirenList'
-      object: { SirenList: SirenList[] }
-      error: string
+      command: 'Get';
+      name: 'SirenList';
+      object: { SirenList: SirenList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'SirenTypeList'
-      object: { SirenTypeList: SirenTypeList[] }
-      error: string
+      command: 'Get';
+      name: 'SirenTypeList';
+      object: { SirenTypeList: SirenTypeList[] };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'SirenTypeSelect'
-      object: { SelectItem: SelectItem[] }
-      error: string
-    }
+      command: 'Get';
+      name: 'SirenTypeSelect';
+      object: { SelectItem: SelectItem[] };
+      error: string;
+    };
 
 type JsonItemScheme =
   | {
-      command: 'Insert' | 'Update' | 'Delete'
-      name: 'Certificate'
-      error: string
+      command: 'Insert' | 'Update' | 'Delete';
+      name: 'Certificate';
+      error: string;
     }
   | { command: 'Insert' | 'Update' | 'Delete'; name: 'Company'; error: string }
   | { command: 'Insert' | 'Update' | 'Delete'; name: 'Contact'; error: string }
   | {
-      command: 'Insert' | 'Update' | 'Delete'
-      name: 'Department'
-      error: string
+      command: 'Insert' | 'Update' | 'Delete';
+      name: 'Department';
+      error: string;
     }
   | {
-      command: 'Insert' | 'Update' | 'Delete'
-      name: 'Education'
-      error: string
+      command: 'Insert' | 'Update' | 'Delete';
+      name: 'Education';
+      error: string;
     }
   | { command: 'Insert' | 'Update' | 'Delete'; name: 'Kind'; error: string }
   | { command: 'Insert' | 'Update' | 'Delete'; name: 'Post'; error: string }
@@ -220,66 +220,66 @@ type JsonItemScheme =
   | { command: 'Insert' | 'Update' | 'Delete'; name: 'Scope'; error: string }
   | { command: 'Insert' | 'Update' | 'Delete'; name: 'Siren'; error: string }
   | {
-      command: 'Insert' | 'Update' | 'Delete'
-      name: 'SirenType'
-      error: string
-    }
+      command: 'Insert' | 'Update' | 'Delete';
+      name: 'SirenType';
+      error: string;
+    };
 
 type JsonGetItemScheme =
   | {
-      command: 'Get'
-      name: 'Certificate'
-      object: { Certificate: Certificate }
-      error: string
+      command: 'Get';
+      name: 'Certificate';
+      object: { Certificate: Certificate };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'Company'
-      object: { Company: Company }
-      error: string
+      command: 'Get';
+      name: 'Company';
+      object: { Company: Company };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'Contact'
-      object: { Contact: Contact }
-      error: string
+      command: 'Get';
+      name: 'Contact';
+      object: { Contact: Contact };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'Department'
-      object: { Department: Department }
-      error: string
+      command: 'Get';
+      name: 'Department';
+      object: { Department: Department };
+      error: string;
     }
   | {
-      command: 'Get'
-      name: 'Education'
-      object: { Education: Education }
-      error: string
+      command: 'Get';
+      name: 'Education';
+      object: { Education: Education };
+      error: string;
     }
   | { command: 'Get'; name: 'Kind'; object: { Kind: Kind }; error: string }
   | { command: 'Get'; name: 'Post'; object: { Post: Post }; error: string }
   | {
-      command: 'Get'
-      name: 'Practice'
-      object: { Practice: Practice }
-      error: string
+      command: 'Get';
+      name: 'Practice';
+      object: { Practice: Practice };
+      error: string;
     }
   | { command: 'Get'; name: 'Rank'; object: { Rank: Rank }; error: string }
   | { command: 'Get'; name: 'Scope'; object: { Scope: Scope }; error: string }
   | { command: 'Get'; name: 'Siren'; object: { Siren: Siren }; error: string }
   | {
-      command: 'Get'
-      name: 'SirenType'
-      object: { SirenType: SirenType }
-      error: string
-    }
+      command: 'Get';
+      name: 'SirenType';
+      object: { SirenType: SirenType };
+      error: string;
+    };
 
 export const GetItem = (name: string, id: string): Item => {
-  const store = useStore()
-  const [data, setData] = useState<Item>()
+  const store = useStore();
+  const [data, setData] = useState<Item>();
 
   useEffect(() => {
-    const NumberID = Number(id)
+    const NumberID = Number(id);
     if (NumberID !== 0) {
       fetch(URL, {
         method: 'POST',
@@ -295,96 +295,96 @@ export const GetItem = (name: string, id: string): Item => {
           if (jsonData?.command === 'Get') {
             switch (jsonData?.name) {
               case 'Certificate':
-                setData(jsonData.object.Certificate)
-                break
+                setData(jsonData.object.Certificate);
+                break;
               case 'Company':
-                setData(jsonData.object.Company)
-                break
+                setData(jsonData.object.Company);
+                break;
               case 'Contact':
-                setData(jsonData.object.Contact)
-                break
+                setData(jsonData.object.Contact);
+                break;
               case 'Department':
-                setData(jsonData.object.Department)
-                break
+                setData(jsonData.object.Department);
+                break;
               case 'Education':
-                setData(jsonData.object.Education)
-                break
+                setData(jsonData.object.Education);
+                break;
               case 'Kind':
-                setData(jsonData.object.Kind)
-                break
+                setData(jsonData.object.Kind);
+                break;
               case 'Post':
-                setData(jsonData.object.Post)
-                break
+                setData(jsonData.object.Post);
+                break;
               case 'Practice':
-                setData(jsonData.object.Practice)
-                break
+                setData(jsonData.object.Practice);
+                break;
               case 'Rank':
-                setData(jsonData.object.Rank)
-                break
+                setData(jsonData.object.Rank);
+                break;
               case 'Scope':
-                setData(jsonData.object.Scope)
-                break
+                setData(jsonData.object.Scope);
+                break;
               case 'Siren':
-                setData(jsonData.object.Siren)
-                break
+                setData(jsonData.object.Siren);
+                break;
               case 'SirenType':
-                setData(jsonData.object.SirenType)
-                break
+                setData(jsonData.object.SirenType);
+                break;
               // default:
               //   throw new Error('unknown item');
             }
           }
           // throw new Error('unknown item');
-        })
+        });
     } else {
       switch (name) {
         case 'Certificate':
-          setData(CertificateEmpty)
-          break
+          setData(CertificateEmpty);
+          break;
         case 'Company':
-          setData(CompanyEmpty)
-          break
+          setData(CompanyEmpty);
+          break;
         case 'Contact':
-          setData(ContactEmpty)
-          break
+          setData(ContactEmpty);
+          break;
         case 'Department':
-          setData(DepartmentEmpty)
-          break
+          setData(DepartmentEmpty);
+          break;
         case 'Education':
-          setData(EducationEmpty)
-          break
+          setData(EducationEmpty);
+          break;
         case 'Kind':
-          setData(KindEmpty)
-          break
+          setData(KindEmpty);
+          break;
         case 'Post':
-          setData(PostEmpty)
-          break
+          setData(PostEmpty);
+          break;
         case 'Practice':
-          setData(PracticeEmpty)
-          break
+          setData(PracticeEmpty);
+          break;
         case 'Rank':
-          setData(RankEmpty)
-          break
+          setData(RankEmpty);
+          break;
         case 'Scope':
-          setData(ScopeEmpty)
-          break
+          setData(ScopeEmpty);
+          break;
         case 'Siren':
-          setData(SirenEmpty)
-          break
+          setData(SirenEmpty);
+          break;
         case 'SirenType':
-          setData(SirenTypeEmpty)
-          break
+          setData(SirenTypeEmpty);
+          break;
         // default:
         //   throw new Error('unknown item');
       }
     }
-  }, [id, name, store.getToken])
-  return data
-}
+  }, [id, name, store.getToken]);
+  return data;
+};
 
 export const GetList = (name: string): List[] => {
-  const store = useStore()
-  const [list, setList] = useState<List[]>([])
+  const store = useStore();
+  const [list, setList] = useState<List[]>([]);
 
   useEffect(() => {
     fetch(URL, {
@@ -401,59 +401,59 @@ export const GetList = (name: string): List[] => {
         if (jsonData?.command === 'Get') {
           switch (jsonData?.name) {
             case 'CertificateList':
-              setList(jsonData.object.CertificateList)
-              break
+              setList(jsonData.object.CertificateList);
+              break;
             case 'CompanyList':
-              setList(jsonData.object.CompanyList)
-              break
+              setList(jsonData.object.CompanyList);
+              break;
             case 'ContactList':
-              setList(jsonData.object.ContactList)
-              break
+              setList(jsonData.object.ContactList);
+              break;
             case 'DepartmentList':
-              setList(jsonData.object.DepartmentList)
-              break
+              setList(jsonData.object.DepartmentList);
+              break;
             case 'EducationList':
-              setList(jsonData.object.EducationList)
-              break
+              setList(jsonData.object.EducationList);
+              break;
             case 'EducationNear':
-              setList(jsonData.object.EducationShort)
-              break
+              setList(jsonData.object.EducationShort);
+              break;
             case 'KindList':
-              setList(jsonData.object.KindList)
-              break
+              setList(jsonData.object.KindList);
+              break;
             case 'PostList':
-              setList(jsonData.object.PostList)
-              break
+              setList(jsonData.object.PostList);
+              break;
             case 'PracticeList':
-              setList(jsonData.object.PracticeList)
-              break
+              setList(jsonData.object.PracticeList);
+              break;
             case 'PracticeNear':
-              setList(jsonData.object.PracticeShort)
-              break
+              setList(jsonData.object.PracticeShort);
+              break;
             case 'RankList':
-              setList(jsonData.object.RankList)
-              break
+              setList(jsonData.object.RankList);
+              break;
             case 'ScopeList':
-              setList(jsonData.object.ScopeList)
-              break
+              setList(jsonData.object.ScopeList);
+              break;
             case 'SirenList':
-              setList(jsonData.object.SirenList)
-              break
+              setList(jsonData.object.SirenList);
+              break;
             case 'SirenTypeList':
-              setList(jsonData.object.SirenTypeList)
-              break
+              setList(jsonData.object.SirenTypeList);
+              break;
           }
         }
-      })
-  }, [name, store.getToken])
+      });
+  }, [name, store.getToken]);
 
-  return list
-}
+  return list;
+};
 
 export const GetSelect = (name: string): [SelectItem[], string] => {
-  const store = useStore()
-  const [list, setSelect] = useState<SelectItem[]>([{ id: 0, name: '' }])
-  const [error, setError] = useState<string>('')
+  const store = useStore();
+  const [list, setSelect] = useState<SelectItem[]>([{ id: 0, name: '' }]);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     fetch(URL, {
@@ -472,48 +472,48 @@ export const GetSelect = (name: string): [SelectItem[], string] => {
             case 'CompanySelect':
               jsonData.object.SelectItem.length > 0
                 ? setSelect(jsonData.object.SelectItem)
-                : setSelect([{ id: 0, name: '' }])
-              break
+                : setSelect([{ id: 0, name: '' }]);
+              break;
             case 'ContactSelect':
               jsonData.object.SelectItem.length > 0
                 ? setSelect(jsonData.object.SelectItem)
-                : setSelect([{ id: 0, name: '' }])
-              break
+                : setSelect([{ id: 0, name: '' }]);
+              break;
             case 'DepartmentSelect':
               jsonData.object.SelectItem.length > 0
                 ? setSelect(jsonData.object.SelectItem)
-                : setSelect([{ id: 0, name: '' }])
-              break
+                : setSelect([{ id: 0, name: '' }]);
+              break;
             case 'KindSelect':
               jsonData.object.SelectItem.length > 0
                 ? setSelect(jsonData.object.SelectItem)
-                : setSelect([{ id: 0, name: '' }])
-              break
+                : setSelect([{ id: 0, name: '' }]);
+              break;
             case 'PostSelect':
               jsonData.object.SelectItem.length > 0
                 ? setSelect(jsonData.object.SelectItem)
-                : setSelect([{ id: 0, name: '' }])
-              break
+                : setSelect([{ id: 0, name: '' }]);
+              break;
             case 'PostGoSelect':
               jsonData.object.SelectItem.length > 0
                 ? setSelect(jsonData.object.SelectItem)
-                : setSelect([{ id: 0, name: '' }])
-              break
+                : setSelect([{ id: 0, name: '' }]);
+              break;
             case 'RankSelect':
               jsonData.object.SelectItem.length > 0
                 ? setSelect(jsonData.object.SelectItem)
-                : setSelect([{ id: 0, name: '' }])
-              break
+                : setSelect([{ id: 0, name: '' }]);
+              break;
             case 'ScopeSelect':
               jsonData.object.SelectItem.length > 0
                 ? setSelect(jsonData.object.SelectItem)
-                : setSelect([{ id: 0, name: '' }])
-              break
+                : setSelect([{ id: 0, name: '' }]);
+              break;
             case 'SirenTypeSelect':
               jsonData.object.SelectItem.length > 0
                 ? setSelect(jsonData.object.SelectItem)
-                : setSelect([{ id: 0, name: '' }])
-              break
+                : setSelect([{ id: 0, name: '' }]);
+              break;
             // default:
             //   throw new Error('unknown select');
           }
@@ -522,12 +522,12 @@ export const GetSelect = (name: string): [SelectItem[], string] => {
         }
       })
       .catch(() => {
-        return setError('unknown select')
-      })
-  }, [name, store.getToken])
+        return setError('unknown select');
+      });
+  }, [name, store.getToken]);
 
-  return [list, error]
-}
+  return [list, error];
+};
 
 export const SetItem = (
   id: number,
@@ -549,16 +549,16 @@ export const SetItem = (
     .then((response) => response.json())
     .then((response) => response as JsonItemScheme)
     .then((jsonData) => {
-      const command = id === 0 ? 'Insert' : 'Update'
+      const command = id === 0 ? 'Insert' : 'Update';
       if (jsonData?.command === command && jsonData.name === name) {
-        status(true)
+        status(true);
       }
-      return status(false)
+      return status(false);
     })
     .catch(() => {
-      return status(false)
-    })
-}
+      return status(false);
+    });
+};
 
 export const DelItem = (
   id: number,
@@ -578,11 +578,11 @@ export const DelItem = (
     .then((response) => response as JsonItemScheme)
     .then((jsonData) => {
       if (jsonData?.command === 'Delete' && jsonData.name === name) {
-        status(true)
+        status(true);
       }
-      return status(false)
+      return status(false);
     })
     .catch(() => {
-      return status(false)
-    })
-}
+      return status(false);
+    });
+};

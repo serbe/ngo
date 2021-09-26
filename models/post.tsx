@@ -5,22 +5,22 @@
 // import { Select, SelectValues } from '../components/select'
 
 export type Post = {
-  id: number
-  name?: string
-  go?: boolean
-  note?: string
-}
+  id: number;
+  name?: string;
+  go?: boolean;
+  note?: string;
+};
 
 export const PostEmpty: Post = {
   id: 0,
-}
+};
 
 export type PostList = {
-  id: number
-  name?: string
-  go?: boolean
-  note?: string
-}
+  id: number;
+  name?: string;
+  go?: boolean;
+  note?: string;
+};
 
 // export const PostIDSelect = (properties: SelectValues): JSX.Element => (
 //   <Select

@@ -4,37 +4,37 @@
 // import { Select, SelectValues } from '../components/select'
 
 export type Education = {
-  id: number
-  contact_id?: number
-  start_date?: string
-  end_date?: string
-  post_id?: number
-  note?: string
-}
+  id: number;
+  contact_id?: number;
+  start_date?: string;
+  end_date?: string;
+  post_id?: number;
+  note?: string;
+};
 
 export const EducationEmpty: Education = {
   id: 0,
-}
+};
 
 export type EducationList = {
-  id: number
-  contact_id?: number
-  contact_name?: string
-  start_date?: string
-  end_date?: string
-  start_str?: string
-  end_str?: string
-  post_id?: number
-  post_name?: string
-  note?: string
-}
+  id: number;
+  contact_id?: number;
+  contact_name?: string;
+  start_date?: string;
+  end_date?: string;
+  start_str?: string;
+  end_str?: string;
+  post_id?: number;
+  post_name?: string;
+  note?: string;
+};
 
 export type EducationShort = {
-  id: number
-  contact_id: number
-  contact_name: string
-  start_date: string
-}
+  id: number;
+  contact_id: number;
+  contact_name: string;
+  start_date: string;
+};
 
 // export const EducationNameSelect = (properties: SelectValues): JSX.Element => (
 //   <Select

@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
-import { Footer } from '../components/footer'
-import { Header } from '../components/header'
+import { Footer } from '../components/footer';
+import { Header } from '../components/header';
 
 export default function Companies(): JSX.Element {
   return (
@@ -9,5 +9,5 @@ export default function Companies(): JSX.Element {
       <Header />
       <Footer />
     </div>
-  )
+  );
 }

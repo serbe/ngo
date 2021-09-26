@@ -5,20 +5,20 @@
 // import { Select, SelectValues } from '../components/select'
 
 export type Scope = {
-  id: number
-  name?: string
-  note?: string
-}
+  id: number;
+  name?: string;
+  note?: string;
+};
 
 export const ScopeEmpty: Scope = {
   id: 0,
-}
+};
 
 export type ScopeList = {
-  id: number
-  name?: string
-  note?: string
-}
+  id: number;
+  name?: string;
+  note?: string;
+};
 
 // export const ScopeIDSelect = (properties: SelectValues): JSX.Element => (
 //   <Select

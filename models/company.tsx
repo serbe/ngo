@@ -2,39 +2,38 @@
 import { ContactShort } from './contact';
 import { PracticeList } from './practice';
 
-
 // import { FormField } from '../components/formfield'
 // import { StringInputProperties } from '../components/input'
 // import { Select, SelectValues } from '../components/select'
 export type Company = {
-  id: number
-  name?: string
-  fullname?: string
-  address?: string
-  scope_id?: number
-  note?: string
-  emails?: string[]
-  phones?: number[]
-  faxes?: number[]
-  practices?: PracticeList[]
-  contacts?: ContactShort[]
-}
+  id: number;
+  name?: string;
+  fullname?: string;
+  address?: string;
+  scope_id?: number;
+  note?: string;
+  emails?: string[];
+  phones?: number[];
+  faxes?: number[];
+  practices?: PracticeList[];
+  contacts?: ContactShort[];
+};
 
 export const CompanyEmpty: Company = {
   id: 0,
-}
+};
 
 export type CompanyList = {
-  id: number
-  name?: string
-  fullname?: string
-  address?: string
-  scope_name?: string
-  emails?: string[]
-  phones?: number[]
-  faxes?: number[]
-  practices?: string[]
-}
+  id: number;
+  name?: string;
+  fullname?: string;
+  address?: string;
+  scope_name?: string;
+  emails?: string[];
+  phones?: number[];
+  faxes?: number[];
+  practices?: string[];
+};
 
 // export const CompanyIDSelect = (properties: SelectValues): JSX.Element => (
 //   <Select
