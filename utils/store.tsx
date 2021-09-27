@@ -22,6 +22,7 @@ class AuthStore {
       this.setFetching(true);
       postCheck(user.token, user.role)
         .then((r) => {
+          console.log('postCheck then', this.fetching);
           if (r) {
             this.setUser(user);
             this.setLogin(r);
@@ -30,9 +31,11 @@ class AuthStore {
           }
         })
         .catch(() => {
+          console.log('postCheck catch', this.fetching);
           this.clearAuth();
         })
         .finally(() => {
+          console.log('postCheck finally', this.fetching);
           this.setFetching(false);
         });
     }
@@ -40,36 +43,43 @@ class AuthStore {
 
   get getUser(): User {
     this.increase();
+    console.log('getUser', this.fetching);
     return this.user;
   }
 
   get getLogin(): boolean {
     this.increase();
+    console.log('getLogin', this.fetching);
     return this.login;
   }
 
   get getCheck(): boolean {
     this.increase();
+    console.log('getCheck', this.fetching);
     return this.check;
   }
 
   get getToken(): string {
     this.increase();
+    console.log('getToken', this.fetching);
     return this.user.token;
   }
 
   get getRole(): number {
     this.increase();
+    console.log('getRole', this.fetching);
     return this.user.role;
   }
 
   get isFetching(): boolean {
     this.increase();
+    console.log('isFetching', this.fetching);
     return this.fetching;
   }
 
   setAuth(user: User, login: boolean): void {
     this.increase();
+    console.log('setAuth', this.fetching);
     setStorage(user);
     this.setUser(user);
     this.setLogin(login);
@@ -77,6 +87,7 @@ class AuthStore {
 
   clearAuth(): void {
     this.increase();
+    console.log('clearAuth', this.fetching);
     clearStorage();
     this.setUser({ role: 0, name: '', token: '' });
     this.setLogin(false);
@@ -84,22 +95,26 @@ class AuthStore {
 
   setUser(user: User): void {
     this.increase();
+    console.log('setUser', this.fetching);
     this.user = user;
   }
 
   setLogin(login: boolean): void {
     this.increase();
+    console.log('setLogin', this.fetching);
     this.login = login;
     this.setCheck(true);
   }
 
   setCheck(check: boolean): void {
     this.increase();
+    console.log('setCheck', this.fetching);
     this.check = check;
   }
 
   setFetching(status: boolean): void {
     this.increase();
+    console.log('setFetching', this.fetching);
     this.fetching = status;
   }
 

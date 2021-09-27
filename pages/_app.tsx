@@ -1,22 +1,22 @@
 import '../styles/globals.css';
 
 import { enableStaticRendering } from 'mobx-react-lite';
-import { AppInitialProps, AppProps } from 'next/app';
+import { AppProps } from 'next/app';
 import React from 'react';
 
 import { StoreProvider } from '../utils/store';
 
 // import { Provider } from 'next-auth/client';
 
-type Props = {
-  isLogged: boolean;
-  isChecked: boolean;
-} & AppProps;
+// type Props = {
+//   isLogged: boolean;
+//   isChecked: boolean;
+// } & AppProps;
 
-type Init = {
-  isLogged: boolean;
-  isChecked: boolean;
-} & AppInitialProps;
+// type Init = {
+//   isLogged: boolean;
+//   isChecked: boolean;
+// } & AppInitialProps;
 
 const isServer = typeof window === 'undefined';
 // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -26,7 +26,7 @@ enableStaticRendering(isServer);
 
 // import { fetchInitialStoreState, DataStore } from '../utils/state'
 
-const MyApp = ({ Component, pageProps, isLogged, isChecked }: Props): JSX.Element => {
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
   // const router = useRouter();
   // // const { initialData } = pageProps
   // console.log('isServer router.asPath', isServer, router.asPath);
