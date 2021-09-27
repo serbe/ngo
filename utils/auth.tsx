@@ -1,7 +1,7 @@
 // import { createContext, Dispatch, useContext } from 'react';
+import { clearStorage, getStorage } from './storage';
+import { AuthStore } from './store';
 
-import { clearStorage, getUser } from './storage';
-import { useStore } from './store';
 
 const loginURL = (process.env.NEXT_PUBLIC_LOGIN_URL as string) || '/go/login';
 const checkURL = (process.env.NEXT_PUBLIC_CHECK_URL as string) || '/go/check';
@@ -15,8 +15,7 @@ interface TJson {
   r: number;
 }
 
-export const PostLogin = (name: string, pass: string): void => {
-  const store = useStore();
+export const PostLogin = (name: string, pass: string, store: AuthStore): void => {
   fetch(loginURL, {
     method: 'POST',
     mode: 'cors',
@@ -39,9 +38,8 @@ export const PostLogin = (name: string, pass: string): void => {
     });
 };
 
-export const PostCheck = (token: string, role: string): void => {
-  // const store = useStore()
-  fetch(checkURL, {
+export const postCheck = (token: string, role: number): Promise<boolean> => {
+  return fetch(checkURL, {
     method: 'POST',
     mode: 'cors',
     headers: {
@@ -53,6 +51,9 @@ export const PostCheck = (token: string, role: string): void => {
     .then((response) => response as CJson)
     .then((jsonData) => {
       return jsonData.r;
+    })
+    .catch(() => {
+      return false;
     });
 };
 
@@ -93,8 +94,8 @@ export const logout = (): void => {
 //   )
 // }
 
-export const userIsLogged = async (cookies: { [key: string]: string }): Promise<boolean> => {
-  const user = getUser(cookies);
+export const userIsLogged = async (): Promise<boolean> => {
+  const user = getStorage();
   const res = await fetch(checkURL, {
     method: 'POST',
     mode: 'cors',

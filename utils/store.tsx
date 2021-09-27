@@ -2,16 +2,40 @@ import { makeAutoObservable } from 'mobx';
 import { createContext, ReactNode, useContext } from 'react';
 
 import { User } from '../models/user';
-import { clearStorage, setStorage } from './storage';
+import { postCheck } from './auth';
+import { clearStorage, getStorage, setStorage } from './storage';
 
 class AuthStore {
   user: User = { role: 0, name: '', token: '' };
   login = false;
   check = false;
+  fetching = false;
   count = 0;
 
   constructor() {
     makeAutoObservable(this);
+    console.log('init store');
+    this.increase();
+    const isServer = typeof window === 'undefined';
+    if (!isServer && localStorage && !this.isFetching) {
+      const user = getStorage();
+      this.setFetching(true);
+      postCheck(user.token, user.role)
+        .then((r) => {
+          if (r) {
+            this.setUser(user);
+            this.setLogin(r);
+          } else {
+            this.clearAuth();
+          }
+        })
+        .catch(() => {
+          this.clearAuth();
+        })
+        .finally(() => {
+          this.setFetching(false);
+        });
+    }
   }
 
   get getUser(): User {
@@ -32,6 +56,16 @@ class AuthStore {
   get getToken(): string {
     this.increase();
     return this.user.token;
+  }
+
+  get getRole(): number {
+    this.increase();
+    return this.user.role;
+  }
+
+  get isFetching(): boolean {
+    this.increase();
+    return this.fetching;
   }
 
   setAuth(user: User, login: boolean): void {
@@ -64,6 +98,11 @@ class AuthStore {
     this.check = check;
   }
 
+  setFetching(status: boolean): void {
+    this.increase();
+    this.fetching = status;
+  }
+
   increase(): void {
     this.count += 1;
     console.log(this.count);
@@ -71,13 +110,13 @@ class AuthStore {
 }
 
 interface StoreProviderProperties {
-  store: AuthStore;
   children: ReactNode;
 }
 
 const StoreContext = createContext<AuthStore>(new AuthStore());
 
-const StoreProvider = ({ store, children }: StoreProviderProperties): JSX.Element => {
+const StoreProvider = ({ children }: StoreProviderProperties): JSX.Element => {
+  const store = new AuthStore();
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     store.writeBlock()
