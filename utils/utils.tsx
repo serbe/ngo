@@ -61,3 +61,28 @@ export const splitNumbers = (items?: number[]): JSX.Element => (
       items.map((arrayItem: number, index: number) => <div key={`div${index}`}>{arrayItem}</div>)}
   </>
 );
+
+const diffMonth = (month: number, date?: Date): Date => {
+  const newDate = date || new Date();
+  newDate.setMonth(newDate.getMonth() - month);
+  return newDate;
+};
+
+export const trClass = (dateStr: string): string => {
+  const date = new Date(dateStr);
+  if (date < new Date()) {
+    return 'tr-green';
+  }
+  const newDate = diffMonth(1);
+  if (date < newDate) {
+    return 'tr-red';
+  }
+  return 'tr-yellow';
+};
+
+export const tinyDate = (date: string): string => {
+  if (date.length === 10) {
+    return `${date.slice(8, 10)}.${date.slice(5, 7)}.${date.slice(2, 4)}`;
+  }
+  return date;
+};

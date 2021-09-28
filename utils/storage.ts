@@ -1,10 +1,5 @@
 import { User } from '../models/user';
 import { postCheck } from './auth';
-import { AuthStore } from './store';
-
-// const TOKEN_NAME = 'token';
-
-// export const MAX_AGE = 60 * 60 * 8;
 
 export const setStorage = (user: User): void => {
   localStorage.setItem('user', JSON.stringify(user));
@@ -28,14 +23,10 @@ export const getStorage = (): User => {
   return user;
 };
 
-export const checkStorage = async (store: AuthStore): Promise<boolean> => {
-  if (!store.check) {
-    const check = await postCheck(store.getToken, store.getRole);
-    if (check) {
-      store.setLogin(true);
-    } else {
-      store.clearAuth();
-    }
+export const checkStorage = async (): Promise<boolean> => {
+  const user = getStorage();
+  if (user.name === "" || user.token === '' || user.role === 0) {
+    throw false;
   }
-  return new Promise(() => {store.check})
-}
+  return await postCheck(user.token, user.role);
+};

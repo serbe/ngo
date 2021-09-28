@@ -1,4 +1,6 @@
 // import React from 'react'
+import { tinyDate, trClass } from '@utils/utils';
+import { useRouter } from 'next/router';
 
 // import { DatePicker, DatePickerValues } from '../components/datepicker'
 // import { Select, SelectValues } from '../components/select'
@@ -64,3 +66,35 @@ export type EducationShort = {
 //     setter={properties.setter}
 //   />
 // )
+
+export const EducationTable = ({ list }: { list: EducationShort[] }): JSX.Element => {
+  const router = useRouter();
+  return (
+    <table className="table-auto">
+      <tbody>
+        {list.map((row) => (
+          <tr key={row.id} className={trClass(row.start_date)}>
+            <td
+              className="has-text-black"
+              onMouseDown={(): void => {
+                router.push(`/educations/${row.id}`);
+              }}
+              role="gridcell"
+            >
+              {tinyDate(row.start_date)}
+            </td>
+            <td
+              className="has-text-black"
+              onMouseDown={(): void => {
+                router.push(`/contacts/${row.contact_id}`);
+              }}
+              role="gridcell"
+            >
+              {row.contact_name}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};

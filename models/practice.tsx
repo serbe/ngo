@@ -1,5 +1,7 @@
 // import React, { ChangeEvent } from 'react'
 // import { useHistory } from 'react-router-dom'
+import { tinyDate, trClass } from '@utils/utils';
+import { useRouter } from 'next/router';
 
 // import { DatePicker, DatePickerValues } from '../components/datepicker'
 // import { FormField } from '../components/formfield'
@@ -90,3 +92,44 @@ export type PracticeShort = {
 //     setter={properties.setter}
 //   />
 // )
+
+export const PracticeTable = ({ list }: { list: PracticeShort[] }): JSX.Element => {
+  const router = useRouter();
+  return (
+    <table className="table is-narrow">
+      <tbody>
+        {list.map((row) => (
+          <tr key={row.id} className={trClass(row.date_of_practice)}>
+            <td
+              className="has-text-black"
+              onMouseDown={(): void => {
+                router.push(`/practices/${row.id}`);
+              }}
+              role="gridcell"
+            >
+              {tinyDate(row.date_of_practice)}
+            </td>
+            <td
+              className="has-text-black"
+              onMouseDown={(): void => {
+                router.push(`/kinds/${row.kind_id}`);
+              }}
+              role="gridcell"
+            >
+              {row.kind_short_name}
+            </td>
+            <td
+              className="has-text-black"
+              onMouseDown={(): void => {
+                router.push(`/companies/${row.company_id}`);
+              }}
+              role="gridcell"
+            >
+              {row.company_name}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+};

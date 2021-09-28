@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 import { Certificate, CertificateEmpty, CertificateList } from '../models/certificate';
 import { Company, CompanyEmpty, CompanyList } from '../models/company';
@@ -387,65 +387,68 @@ export const GetList = (name: string): List[] => {
   const [list, setList] = useState<List[]>([]);
 
   useEffect(() => {
-    fetch(URL, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: `{"command":{"Get":{"List":"${name}"}},"addon":"${store.getToken}"}`,
-    })
-      .then((response) => response.json())
-      .then((response) => response as JsonListScheme)
-      .then((jsonData) => {
-        if (jsonData?.command === 'Get') {
-          switch (jsonData?.name) {
-            case 'CertificateList':
-              setList(jsonData.object.CertificateList);
-              break;
-            case 'CompanyList':
-              setList(jsonData.object.CompanyList);
-              break;
-            case 'ContactList':
-              setList(jsonData.object.ContactList);
-              break;
-            case 'DepartmentList':
-              setList(jsonData.object.DepartmentList);
-              break;
-            case 'EducationList':
-              setList(jsonData.object.EducationList);
-              break;
-            case 'EducationNear':
-              setList(jsonData.object.EducationShort);
-              break;
-            case 'KindList':
-              setList(jsonData.object.KindList);
-              break;
-            case 'PostList':
-              setList(jsonData.object.PostList);
-              break;
-            case 'PracticeList':
-              setList(jsonData.object.PracticeList);
-              break;
-            case 'PracticeNear':
-              setList(jsonData.object.PracticeShort);
-              break;
-            case 'RankList':
-              setList(jsonData.object.RankList);
-              break;
-            case 'ScopeList':
-              setList(jsonData.object.ScopeList);
-              break;
-            case 'SirenList':
-              setList(jsonData.object.SirenList);
-              break;
-            case 'SirenTypeList':
-              setList(jsonData.object.SirenTypeList);
-              break;
+    console.log(store.getLogin);
+    if (store.getLogin) {
+      fetch(URL, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: `{"command":{"GetList":"${name}"},"addon":"${store.getToken}"}`,
+      })
+        .then((response) => response.json())
+        .then((response) => response as JsonListScheme)
+        .then((jsonData) => {
+          if (jsonData?.command === 'Get') {
+            switch (jsonData?.name) {
+              case 'CertificateList':
+                setList(jsonData.object.CertificateList);
+                break;
+              case 'CompanyList':
+                setList(jsonData.object.CompanyList);
+                break;
+              case 'ContactList':
+                setList(jsonData.object.ContactList);
+                break;
+              case 'DepartmentList':
+                setList(jsonData.object.DepartmentList);
+                break;
+              case 'EducationList':
+                setList(jsonData.object.EducationList);
+                break;
+              case 'EducationNear':
+                setList(jsonData.object.EducationShort);
+                break;
+              case 'KindList':
+                setList(jsonData.object.KindList);
+                break;
+              case 'PostList':
+                setList(jsonData.object.PostList);
+                break;
+              case 'PracticeList':
+                setList(jsonData.object.PracticeList);
+                break;
+              case 'PracticeNear':
+                setList(jsonData.object.PracticeShort);
+                break;
+              case 'RankList':
+                setList(jsonData.object.RankList);
+                break;
+              case 'ScopeList':
+                setList(jsonData.object.ScopeList);
+                break;
+              case 'SirenList':
+                setList(jsonData.object.SirenList);
+                break;
+              case 'SirenTypeList':
+                setList(jsonData.object.SirenTypeList);
+                break;
+            }
           }
-        }
-      });
-  }, [name, store.getToken]);
+        });
+    }
+  }, [name, store.getLogin, store.getToken]);
 
   return list;
 };
